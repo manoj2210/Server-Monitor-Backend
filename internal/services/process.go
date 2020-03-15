@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"github.com/manoj2210/Server-Monitor/internal/models"
 	"os/exec"
 	"strings"
@@ -25,6 +26,16 @@ func GetProcessInfo(proc *models.Process) error {
 			proc.Data = append(proc.Data, procRec)
 		}
 	}
+	proc.Data=proc.Data[2:30]
 
 	return nil
+}
+
+func GetDetails()  {
+		out,err:=exec.Command("top").Output()
+	if err!=nil{
+		fmt.Println(err)
+	}
+		fmt.Println(out)
+	
 }

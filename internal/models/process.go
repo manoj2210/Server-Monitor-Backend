@@ -1,15 +1,18 @@
 package models
 
 type Process struct {
-	Data[] ProcessData
+	Data[] ProcessData `json:"data""`
 }
 
 type ProcessData struct {
-	User string
-	PID string
-	CpuPercent string
-	MemPercent string
-	Duration string
+	User string `json:"user"`
+	PID string	`json:"pid"`
+	State string `json:"state"`
+	TMU string `json:"tmu"`
+	Command string `json:"command"`
+	CpuPercent string `json:"cpu"`
+	MemPercent string `json:"mem"`
+	Duration string		`json:"duration"`
 }
 
 func NewProcessModel() *Process {
@@ -20,6 +23,9 @@ func NewProcessModel() *Process {
 		CpuPercent: "",
 		MemPercent: "",
 		Duration:	"",
+		State:"",
+		TMU:"",
+		Command:"",
 	})
 	return &Process{
 		Data: P,

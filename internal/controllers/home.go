@@ -11,24 +11,23 @@ import (
 	"time"
 )
 
-type ProcessController struct {}
+type HomeController struct{
 
-var upgrade = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
 }
 
-func (p *ProcessController) WSGetProcessInfo(c *gin.Context){
+func (p *ProcessController) WSGetHomeInfo(c *gin.Context){
 	upgrade.CheckOrigin = func(r *http.Request) bool { return true }
 	ws, err := upgrade.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
 		log.Println(err)
 	}
-	proc:=models.NewProcessModel()
-	err=getProcessInfo(ws,proc)
+	basic:=models.NewBasic()
+	mem:=models.NewMem()
+	task:=models.NewTasks()
+	cputime:=models.NewCpuTime()
+
+
+	err=getHomeInfo(ws,basic,mem,task,cputime)
 	if err!=nil{
 		restErr:= errors.NewInternalServerError("Unable to Get Process Data")
 		c.JSON(restErr.Status, restErr)
@@ -36,17 +35,23 @@ func (p *ProcessController) WSGetProcessInfo(c *gin.Context){
 	}
 }
 
-func getProcessInfo(conn *websocket.Conn,p *models.Process) error {
+func getHomeInfo(conn *websocket.Conn,b * models.Basic,m *models.Mem,t *models.Task,c *models.CpuTime) error {
 	for {
-		err:=services.GetProcessInfo(p)
-		if err!=nil{
-			return err
+		services.GetBasicInfo(b)
+		services.GetMemInfo(m)
+		services.GetTasksAndCpuInfo(t,c)
+		s:=struct{
+			b *models.Basic `json:"b"`
+			m *models.Mem	`json:"m"`
+			t *models.Task	`json:"t"`
+			c *models.CpuTime	`json:"c"`
+		}{
+			b,m,t,c,
 		}
-		if err := conn.WriteJSON(p); err != nil {
+		if err := conn.WriteJSON(s); err != nil {
 			return err
 		}
 		log.Println("Sending Data")
 		time.Sleep(1000 *time.Millisecond)
-		p=models.NewProcessModel()
 	}
 }
