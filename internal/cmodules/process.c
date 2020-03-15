@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-void ls(char *out){
+void process(char *out){
     FILE *fp = popen("top -n 1 -b | head -n 30", "r");
     char ch;
     ch=fgetc(fp);
