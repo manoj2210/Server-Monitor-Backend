@@ -13,7 +13,9 @@ func urlMaps()  {
 
 	processController:=controllers.ProcessController{}
 	homeController:=controllers.HomeController{}
+	hardwareController:=controllers.HardwareController{}
 
 	router.GET("/process",processController.WSGetProcessInfo)
 	router.GET("/home",homeController.WSGetHomeInfo)
+	router.GET("/hardware",hardwareController.GetHardwareInfo)
 }
