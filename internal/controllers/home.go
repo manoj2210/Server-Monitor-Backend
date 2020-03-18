@@ -3,7 +3,6 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/manoj2210/Server-Monitor/internal/errors"
 	"github.com/manoj2210/Server-Monitor/internal/models"
 	"github.com/manoj2210/Server-Monitor/internal/services"
 	"log"
@@ -15,7 +14,7 @@ type HomeController struct{
 
 }
 
-func (p *ProcessController) WSGetHomeInfo(c *gin.Context){
+func (p *HomeController) WSGetHomeInfo(c *gin.Context){
 	upgrade.CheckOrigin = func(r *http.Request) bool { return true }
 	ws, err := upgrade.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
@@ -25,33 +24,25 @@ func (p *ProcessController) WSGetHomeInfo(c *gin.Context){
 	mem:=models.NewMem()
 	task:=models.NewTasks()
 	cputime:=models.NewCpuTime()
+	home:=models.Home{B: *basic, M: *mem, T: *task, C: *cputime}
 
 
-	err=getHomeInfo(ws,basic,mem,task,cputime)
-	if err!=nil{
-		restErr:= errors.NewInternalServerError("Unable to Get Process Data")
-		c.JSON(restErr.Status, restErr)
-		return
-	}
+	go getHomeInfo(ws,home)
 }
 
-func getHomeInfo(conn *websocket.Conn,b * models.Basic,m *models.Mem,t *models.Task,c *models.CpuTime) error {
+func getHomeInfo(conn *websocket.Conn,home models.Home) error {
 	for {
-		services.GetBasicInfo(b)
-		services.GetMemInfo(m)
-		services.GetTasksAndCpuInfo(t,c)
-		s:=struct{
-			b *models.Basic `json:"b"`
-			m *models.Mem	`json:"m"`
-			t *models.Task	`json:"t"`
-			c *models.CpuTime	`json:"c"`
-		}{
-			b,m,t,c,
-		}
-		if err := conn.WriteJSON(s); err != nil {
+		services.GetBasicInfo(&home.B)
+		services.GetMemInfo(&home.M)
+		services.GetTasksAndCpuInfo(&home.T,&home.C)
+		if err := conn.WriteJSON(home); err != nil {
 			return err
 		}
 		log.Println("Sending Data")
+		_,p,_:=conn.ReadMessage()
+		if string(p)=="close" {
+			return nil
+		}
 		time.Sleep(1000 *time.Millisecond)
 	}
 }

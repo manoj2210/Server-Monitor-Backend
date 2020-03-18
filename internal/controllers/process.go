@@ -3,10 +3,10 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/manoj2210/Server-Monitor/internal/errors"
 	"github.com/manoj2210/Server-Monitor/internal/models"
 	"github.com/manoj2210/Server-Monitor/internal/services"
 )
@@ -28,12 +28,7 @@ func (p *ProcessController) WSGetProcessInfo(c *gin.Context) {
 		log.Println(err)
 	}
 	proc := models.NewProcessModel()
-	err = getProcessInfo(ws, proc)
-	if err != nil {
-		restErr := errors.NewInternalServerError("Unable to Get Process Data")
-		c.JSON(restErr.Status, restErr)
-		return
-	}
+	go getProcessInfo(ws, proc)
 }
 
 func getProcessInfo(conn *websocket.Conn, p *models.Process) error {
@@ -43,7 +38,11 @@ func getProcessInfo(conn *websocket.Conn, p *models.Process) error {
 			return err
 		}
 		log.Println("Sending Data")
-		// time.Sleep(5000 * time.Millisecond)
+		_,r,_:=conn.ReadMessage()
+		if string(r)=="close" {
+			return nil
+		}
+		time.Sleep(1000 * time.Millisecond)
 		p = models.NewProcessModel()
 	}
 }

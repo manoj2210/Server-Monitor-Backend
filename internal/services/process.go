@@ -45,7 +45,7 @@ func GetProcessInfo(proc *models.Process) {
 		procRec := models.ProcessData{}
 		p := strings.Join(strings.Fields(strings.TrimSpace(d)), " ")
 		arr := strings.Split(p, " ")
-		if len(arr) >= 11 {
+		if len(arr) > 11 {
 			procRec.User = arr[1]
 			procRec.PID = arr[0]
 			procRec.TMU = arr[4]
