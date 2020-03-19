@@ -51,7 +51,7 @@ void ActiveConn(char *out)
 void NoOfConnections(char *out)
  {
      int i=0;
-       FILE *fp = popen("netstat -anp | grep :3000 | grep ESTABLISHED|wc -l", "r");
+       FILE *fp = popen("netstat -anp | grep :80 | grep ESTABLISHED|wc -l", "r");
        char ch = fgetc(fp);
 
        while (ch != EOF)
