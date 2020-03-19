@@ -55,7 +55,7 @@ func GetNetworkInfo(n *models.Networks){
 		ar := strings.Split(p, " ")
 		if len(ar)>=7 {
 			c.Protocol=ar[0]
-			c.Datasr=string(ar[1]+";"+ar[2])
+			c.Datasr=string(ar[1]+"/"+ar[2])
 			c.LocalAddress=ar[3]
 			c.ForeignAddress=ar[4]
 			c.State=ar[5]

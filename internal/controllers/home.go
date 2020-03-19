@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/manoj2210/Server-Monitor/internal/models"
@@ -41,6 +42,8 @@ func getHomeInfo(conn *websocket.Conn,home models.Home) error {
 		log.Println("Sending Data")
 		_,p,_:=conn.ReadMessage()
 		if string(p)=="close" {
+			conn.Close()
+			fmt.Println("Connection Closed")
 			return nil
 		}
 		time.Sleep(1000 *time.Millisecond)

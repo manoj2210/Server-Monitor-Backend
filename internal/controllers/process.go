@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -40,6 +41,8 @@ func getProcessInfo(conn *websocket.Conn, p *models.Process) error {
 		log.Println("Sending Data")
 		_,r,_:=conn.ReadMessage()
 		if string(r)=="close" {
+			conn.Close()
+			fmt.Println("Connection Closed")
 			return nil
 		}
 		time.Sleep(1000 * time.Millisecond)
