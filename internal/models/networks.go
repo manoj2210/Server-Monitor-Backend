@@ -4,8 +4,15 @@ type Networks struct {
 	Conn []Conn `json:"conn"`
 	RouteTable []RoutTable `json:"route_table"`
 	ActiveConn []ActConn `json:"active_conn"`
+	NoOfConn string `json:"no_of_conn"`
+	Arr []Con `json:"arr"`
+
 }
 
+type Con struct {
+	Time int `json:"x"`
+	Data int `json:"y"`
+}
 type Conn struct {
 	Name string `json:"name"`
 	UUID string `json:"uuid"`

@@ -65,4 +65,10 @@ func GetNetworkInfo(n *models.Networks){
 			n.ActiveConn=append(n.ActiveConn,c)
 		}
 	}
+	buf3:=make([]byte, 100)
+	C.NoOfConnections((*C.char)(unsafe.Pointer(&buf3[0])))
+	t=string(buf3)
+	arr = strings.Split(t, "\n")
+	n.NoOfConn=arr[0]
+
 }
