@@ -21,6 +21,6 @@ func StartApplication()  {
 		// ExposeHeaders:    []string{"X-Total-Count"},
 	}))
 	urlMaps()
-	fmt.Println("Listening at port 8080")
-	http.ListenAndServe(":8080",router)
+	fmt.Println("Listening at port 80")
+	http.ListenAndServe(":80",router)
 }
