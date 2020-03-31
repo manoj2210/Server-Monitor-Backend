@@ -39,13 +39,13 @@ func getProcessInfo(conn *websocket.Conn, p *models.Process) error {
 			return err
 		}
 		log.Println("Sending Data")
-		_,r,_:=conn.ReadMessage()
-		if string(r)=="close" {
+		_, r, _ := conn.ReadMessage()
+		if string(r) == "close" {
 			conn.Close()
 			fmt.Println("Connection Closed")
 			return nil
 		}
-		time.Sleep(1000 * time.Millisecond)
+		time.Sleep(5000 * time.Millisecond)
 		p = models.NewProcessModel()
 	}
 }
