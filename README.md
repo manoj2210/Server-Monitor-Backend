@@ -11,14 +11,14 @@
    2. GCC compiler</br>
    3. LINUX Operating System</br>
    4. Basic commands that comes Default with LINUX:</br>
-        * top</br>
-        * uname</br>
-        * lscpu</br>
-        * free </br>
-        * netstat</br>
+     &nbsp   * top</br>
+     &nbsp   * uname</br>
+     &nbsp   * lscpu</br>
+     &nbsp   * free </br>
+     &nbsp   * netstat</br>
    5. Comes out of the box:</br>
-        * ip link show (sudo apt install net-tools)</br>
-        * nmcli (sudo apt-get install network-manager)</br>
+      &nbsp  * ip link show (sudo apt install net-tools)</br>
+      &nbsp  * nmcli (sudo apt-get install network-manager)</br>
 
 
 <a href="https://github.com/manoj2210/Server-Monitor-Backend.git">`git clone https://github.com/manoj2210/Server-Monitor-Backend.git`</a>
