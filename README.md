@@ -11,14 +11,14 @@
    2. GCC compiler</br>
    3. LINUX Operating System</br>
    4. Basic commands that comes Default with LINUX:</br>
-     &nbsp&nbsp   * top</br>
-     &nbsp&nbsp   * uname</br>
-&nbsp     &nbsp   * lscpu</br>
-&nbsp     &nbsp   * free </br>
-&nbsp     &nbsp   * netstat</br>
+     &nbsp&nbsp&nbsp&nbsp   * top</br>
+     &nbsp&nbsp&nbsp&nbsp   * uname</br>
+     &nbsp&nbsp&nbsp&nbsp   * lscpu</br>
+     &nbsp&nbsp&nbsp&nbsp   * free </br>
+     &nbsp&nbsp&nbsp&nbsp   * netstat</br>
    5. Comes out of the box:</br>
-&nbsp      &nbsp  * ip link show (sudo apt install net-tools)</br>
-&nbsp      &nbsp  * nmcli (sudo apt-get install network-manager)</br>
+&nbsp&nbsp&nbsp      &nbsp  * ip link show (sudo apt install net-tools)</br>
+&nbsp&nbsp&nbsp      &nbsp  * nmcli (sudo apt-get install network-manager)</br></br>
  
 
 If in Ubuntu run the script file 
