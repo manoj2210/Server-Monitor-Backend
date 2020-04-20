@@ -11,14 +11,19 @@
    2. GCC compiler</br>
    3. LINUX Operating System</br>
    4. Basic commands that comes Default with LINUX:</br>
-     &nbsp   * top</br>
-     &nbsp   * uname</br>
-     &nbsp   * lscpu</br>
-     &nbsp   * free </br>
-     &nbsp   * netstat</br>
+     &nbsp&nbsp   * top</br>
+     &nbsp&nbsp   * uname</br>
+&nbsp     &nbsp   * lscpu</br>
+&nbsp     &nbsp   * free </br>
+&nbsp     &nbsp   * netstat</br>
    5. Comes out of the box:</br>
-      &nbsp  * ip link show (sudo apt install net-tools)</br>
-      &nbsp  * nmcli (sudo apt-get install network-manager)</br>
+&nbsp      &nbsp  * ip link show (sudo apt install net-tools)</br>
+&nbsp      &nbsp  * nmcli (sudo apt-get install network-manager)</br>
+ 
+
+If in Ubuntu run the script file 
+
+`$ sudo start_script.sh`
 
 
 <a href="https://github.com/manoj2210/Server-Monitor-Backend.git">`git clone https://github.com/manoj2210/Server-Monitor-Backend.git`</a>
@@ -32,4 +37,6 @@ Next, install the dependencies for the project using the following command:
 `$ go run cmd/main.go` 
 
 Keep the backend running and run front end in another terminal.
+
+Any difficulty please contact.
  
